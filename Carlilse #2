@@ -1,0 +1,77 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package assignment2;
+
+import java.io.*;
+import java.util.*;
+/**
+ *
+ * @author James
+ */
+public class Assignment2
+{
+
+        private static final String FILENAME = "C:\\Users\\James\\Documents\\NetBeansProjects\\Assignment2\\src\\assignment2\\list.txt";
+
+    public static void main(String[] args)
+    {
+        int [][] arr = new int [20][20];
+        int numSum = 4;
+        readFile(arr);
+        //printArray(arr);
+        greatSum(arr, numSum);
+        
+  
+    }
+    //reads the file and puts into a
+    public static void readFile(int [][] arr)
+    {
+            try
+            {
+                Scanner input = new Scanner(new File(FILENAME));
+
+                int n = input.nextInt();
+                while (input.hasNext() == true)
+                {
+                    for(int i = 0;i<20;i++)
+                        for(int j = 0; j < 20; j++)
+                        {
+                            arr[i][j] = n;
+                            if (input.hasNext())
+                                n = input.nextInt();
+                        }
+
+                    
+                }
+            }catch (IOException e) {}
+        }
+    
+    //prints the arry used for testing
+    public static void printArray(int [][] arr)
+    {
+        for(int i = 0; i< arr.length;i++)
+             for(int j = 0; j< arr.length;j++)
+                 System.out.println(arr[i][j]);
+    } 
+    
+    public static void greatSum(int [][] arr, int n)
+    {
+        int largesum = 0;
+        int currsum = 0;
+        for(int i = 0; i < arr.length;i++ )
+            for (int j = 0; j < arr.length - n; j++)
+            {
+                for (int k = 0; k < n;k++)
+                {
+                    currsum += arr[i][j+ k];
+                }
+                if (currsum > largesum)
+                    largesum = currsum;
+                currsum = 0;
+            }
+    System.out.println(largesum);                
+    }
+}
